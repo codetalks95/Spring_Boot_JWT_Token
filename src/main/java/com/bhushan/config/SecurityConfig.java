@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/student/addNewRecord","/student/authenticate").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/products/**")
+                .authorizeHttpRequests().requestMatchers("/student/**")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

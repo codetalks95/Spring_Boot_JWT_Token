@@ -3,6 +3,7 @@ package com.bhushan.controller;
 import com.bhushan.Response.AuthenticateResponse;
 import com.bhushan.Response.StudentResponse;
 import com.bhushan.dto.AuthRequestModel;
+import com.bhushan.entity.StudentEntity;
 import com.bhushan.entity.UserInformation;
 import com.bhushan.service.JwtService;
 import com.bhushan.service.StudentService;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +19,7 @@ public class StudentController {
 
     @Autowired
     private StudentService service;
+
     @Autowired
     private JwtService jwtService;
 
@@ -27,7 +28,7 @@ public class StudentController {
 
     @PostMapping("/addNewRecord")
     public StudentResponse addNewUser(@RequestBody UserInformation userInfo) {
-        return service.addUser(userInfo);
+        return service.addUserInformationData(userInfo);
     }
 
     @PostMapping("/authenticate")
@@ -43,5 +44,10 @@ public class StudentController {
             authenticateResponse.setMessage("Something Went Wrong , JWT Token Not Generated");
         }
         return authenticateResponse;
+    }
+
+    @PostMapping("/addNewStudent")
+    public StudentResponse addNewStudent(@RequestBody StudentEntity studentEntity) {
+        return service.addStudentData(studentEntity);
     }
 }
